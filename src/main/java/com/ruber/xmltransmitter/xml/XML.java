@@ -3,23 +3,19 @@ package com.ruber.xmltransmitter.xml;
 import io.reactivex.FlowableOperator;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.lang.invoke.MethodHandles;
 
 public class XML {
 
-    public static FlowableOperator<XMLEvent, byte[]> parseToXmlEventsOperator() {
+    public static <T> FlowableOperator<T, byte[]> parseXmlNodesToObjects(String fieldName, Class<T> clazz) {
 
-        return new FlowableOperator<>() {
+        return new FlowableOperator<T, byte[]>() {
 
-            private final SAXXMLFeeder feeder = new SAXXMLFeeder();
+            private final SAXXMLFeeder<T> feeder = new SAXXMLFeeder<>(fieldName, clazz);
 
             @Override
-            public Subscriber<? super byte[]> apply(Subscriber<? super XMLEvent> observer) {
+            public Subscriber<? super byte[]> apply(Subscriber<? super T> observer) {
 
-                return new Subscriber<>() {
+                return new Subscriber<byte[]>() {
 
                     @Override
                     public void onSubscribe(Subscription s) {

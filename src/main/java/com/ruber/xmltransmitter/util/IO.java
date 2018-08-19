@@ -34,7 +34,7 @@ public class IO {
     private static void readAsync(Emitter<ByteBuffer> emitter, int position, AsynchronousFileChannel fileChannel) {
         ByteBuffer byteBuffer = ByteBuffer.allocate(BUFFER_SIZE);
 
-        fileChannel.read(byteBuffer, position, byteBuffer, new CompletionHandler<>() {
+        fileChannel.read(byteBuffer, position, byteBuffer, new CompletionHandler<Integer,ByteBuffer>() {
 
             @Override
             public void completed(Integer result, ByteBuffer byteBuffer) {
