@@ -19,4 +19,28 @@ public class Field {
                 ", readOnly='" + readOnly + '\'' +
                 '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getRequired() {
+        return required;
+    }
+
+    public String getDigitOnly() {
+        return digitOnly;
+    }
+
+    public String getReadOnly() {
+        return readOnly;
+    }
 }
